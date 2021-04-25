@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List of authors{% endblock %}
+
+{% block body %}
+    {% for type, messages in app.flashes(['success', 'danger']) %}
+        {% for message in messages %}
+            <div class="alert flash-alert alert-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div id="deletion-success-alert" class="alert alert-success">
+    </div>
+    <div id="deletion-failure-alert" class="alert alert-danger">
+    </div>
+    <div class="row pb-3 pt-2">
+        <div class="col-sm-offset-2 col-sm-10">
+            <a class="btn btn-primary" href="{{ path('author.create') }}">
+                Add new author
+            </a>
+        </div>
+    </div>
+    <table class="table table-striped" id="authorTable">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>First name</td>
+                <td>Last name</td>
+                <td style="text-align:center">Actions</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for author in authors %}
+            <tr>
+                <td>{{ author.id }}</td>
+                <td>{{ author.firstName }}</td>
+                <td>{{ author.lastName }}</td>
+                <td style="text-align:center">
+                    <a class="btn btn-info edit-author" href="{{ path('author.edit',{id: author.id}) }}">
+                        Edit
+                    </a>
+                    <a class="btn btn-danger delete-author" data-id="{{ author.id }}" href="#">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="/js/author.js"></script>
+{% endblock %}

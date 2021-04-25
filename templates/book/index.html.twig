@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List of books{% endblock %}
+
+{% block body %}
+    {% for type, messages in app.flashes(['success', 'danger']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }} flash-alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div id="deletion-success-alert" class="alert alert-success">
+    </div>
+    <div id="deletion-failure-alert" class="alert alert-danger">
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-2 col-sm-10">
+            <a class="btn btn-primary" href="{{ path('book.create') }}">
+                Add new book
+            </a>
+        </div>
+    </div>
+    <table class="table table-striped" id="bookTable">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Title</td>
+                <td>Author</td>
+                <td>ISBN</td>
+                <td>Year of publication</td>
+                <td>Publishing house</td>
+                <td style="text-align:center">Actions</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.yearOfPublication }}</td>
+                <td>{{ book.publishingHouse }}</td>
+                <td style="text-align:center">
+                    <a class="btn btn-info edit-book" href="{{ path('book.edit',{id: book.id}) }}">
+                        Edit
+                    </a>
+                    <a class="btn btn-danger delete-book" data-id="{{ book.id }}" href="#">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="/js/book.js"></script>
+{% endblock %}

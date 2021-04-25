@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create book{% endblock %}
+
+{% block body %}
+    <div class="row pb-3 pt-2">
+        <div class="col-sm-offset-2 col-sm-10">
+            <a class="btn btn-primary" href="{{ path('book.index') }}">
+                Return to book list
+            </a>
+        </div>
+    </div>
+    {{ form(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="/js/book_creation.js"></script>
+{% endblock %}

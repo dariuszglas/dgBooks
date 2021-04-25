@@ -1,0 +1,8 @@
+{% extends('base.html.twig') %}
+
+{% block body %}
+    <h1>Welcome to our page</h1>
+    <p>We have <a href="{{ path('author.index') }}">{{ authorCount }} authors</a></p>
+    <p>We have <a href="{{ path('publishing_house.index') }}">{{ publishingHouseCount }} publishing houses</a></p>
+    <p>We have <a href="{{ path('book.index') }}">{{ bookCount }} books</a></p>
+{% endblock %}
